@@ -20,6 +20,6 @@ foreach ($jsonDecodeArray as $jsonDecodeContent) {
     }
 }
 
-file_put_contents($filename, json_encode($jsonDecodeArray).PHP_EOL);
+file_put_contents($filename, json_encode($jsonEditArray).PHP_EOL);
 header("Location: {$url}");
 exit;
