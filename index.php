@@ -41,7 +41,6 @@ if (isset($_POST['statusChange'])) {
 <body>
     <h1>タスクリスト</h1>
     <a href="addTask.php" class="btn btn-primary">追加する</a></div>
-    <a href="edit.php" class="btn btn-primary">編集する</a></div>
     <a href="deleteContent.php" class="btn btn-primary">削除する</a></div>
     <div class="container">
         <table class="table table table-striped">
