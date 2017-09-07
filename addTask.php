@@ -12,7 +12,7 @@ if (isset($_POST['taskName']) && isset($_POST['daySet'])) {
         "status"   => '0'
     ];
 
-    writeDateInFile($jsonDecodeArray, $filename);
+    file_put_contents($filename, json_encode($jsonDecodeArray).PHP_EOL);
 
     header("Location: {$url}");
     exit;

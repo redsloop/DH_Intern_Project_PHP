@@ -16,11 +16,10 @@ foreach ($jsonDecodeArray as $jsonDecodeContent) {
             "day"      => $jsonDecodeContent->day,
             "status"   => $jsonDecodeContent->status
         ];
-
         $index++;
     }
 }
 
-writeDateInFile($jsonEditArray, $filename);
+file_put_contents($filename, json_encode($jsonEditArray).PHP_EOL);
 header("Location: {$url}");
 exit;
