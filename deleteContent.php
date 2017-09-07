@@ -3,27 +3,24 @@
 require('functionAndVarForFile.php');
 require('redirectURL.php');
 
-$jsonDecodeArray = json_decode(readInputFile($filename));
-
-fileDelete($filename);
+$jsonDecodeArray = json_decode(file_get_contents($filename));
 
 $index = 0;
 $jsonEditArray = array();
 
-foreach ($jsonDecodeArray as $jsonDecodeObj) {
-    $jsonDecodeContent = (array)$jsonDecodeObj;
-    if($jsonDecodeContent['id'] != $_GET['taskId']) {
+foreach ($jsonDecodeArray as $jsonDecodeContent) {
+    if($jsonDecodeContent->id != $_GET['taskId']) {
         $jsonEditArray [] = [
             "id"       => $index,
-            "taskName" => $jsonDecodeContent['taskName'],
-            "day"      => $jsonDecodeContent['day'],
-            "status"   => $jsonDecodeContent['status']
+            "taskName" => $jsonDecodeContent->taskName,
+            "day"      => $jsonDecodeContent->day,
+            "status"   => $jsonDecodeContent->status
         ];
 
         $index++;
     }
 }
-$jsonEncode = json_encode($jsonEditArray);
-writeDateInFile($jsonEncode, $filename);
+
+writeDateInFile($jsonEditArray, $filename);
 header("Location: {$url}");
 exit;

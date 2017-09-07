@@ -3,7 +3,33 @@
 require('functionAndVarForFile.php');
 require('redirectURL.php');
 
-$jsonDecodeArray = json_decode(readInputFile($filename));
+$jsonDecodeArray = json_decode(file_get_contents($filename));
+
+if (isset($_POST['taskName']) && isset($_POST['daySet'])) {
+
+    $jsonEditArray = array();
+    foreach ($jsonDecodeArray as $jsonDecodeContent) {
+        if($jsonDecodeContent->id == $_GET['taskId']) {
+            $jsonEditArray [] =[
+                "id"       => $jsonDecodeContent->id,
+                "taskName" => $_POST['taskName'],
+                "day"      => $_POST['daySet'],
+                "status"   => '0'
+            ];
+        } else {
+            $jsonEditArray [] = [
+                "id"       => $jsonDecodeContent->id,
+                "taskName" => $jsonDecodeContent->taskName,
+                "day"      => $jsonDecodeContent->day,
+                "status"   => $jsonDecodeContent->status
+            ];
+        }
+    }
+
+    writeDateInFile($jsonEditArray, $filename);
+    header("Location: {$url}");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -36,35 +62,6 @@ $jsonDecodeArray = json_decode(readInputFile($filename));
          <button type="submit" class="btn btn-primary btn-lg">編集</button>
      </form>
 
-     <?php
-        if (isset($_POST['taskName']) && isset($_POST['daySet'])) {
-            fileDelete($filename);
-
-            $jsonEditArray = array();
-            foreach ($jsonDecodeArray as $jsonDecodeObj) {
-                $jsonDecodeContent = (array)$jsonDecodeObj;
-                if($jsonDecodeContent['id'] == $_GET['taskId']) {
-                    $jsonEditArray [] =[
-                        "id"       => $jsonDecodeContent['id'],
-                        "taskName" => $_POST['taskName'],
-                        "day"      => $_POST['daySet'],
-                        "status"   => '0'
-                    ];
-                } else {
-                    $jsonEditArray [] = [
-                        "id"       => $jsonDecodeContent['id'],
-                        "taskName" => $jsonDecodeContent['taskName'],
-                        "day"      => $jsonDecodeContent['day'],
-                        "status"   => $jsonDecodeContent['status']
-                    ];
-                }
-            }
-            $jsonEncode = json_encode($jsonEditArray);
-            writeDateInFile($jsonEncode, $filename);
-            header("Location: {$url}");
-            exit;
-        }
-     ?>
      <br>
      <a href="index.php" class="btn btn-info">タスクリストに戻る</a></div>
 
