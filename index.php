@@ -41,7 +41,6 @@ if (isset($_POST['statusChange'])) {
 <body>
     <h1>タスクリスト</h1>
     <a href="addTask.php" class="btn btn-primary">追加する</a></div>
-    <a href="edit.php" class="btn btn-primary">編集する</a></div>
     <a href="deleteContent.php" class="btn btn-primary">削除する</a></div>
     <div class="container">
         <table class="table table table-striped">
@@ -51,6 +50,7 @@ if (isset($_POST['statusChange'])) {
                     <th>タスク名</th>
                     <th>期限 or 日程</th>
                     <th>完了 or 未完了</th>
+                    <th>編集</th>
                 </tr>
             </thead>
             <tbody>
@@ -82,10 +82,13 @@ if (isset($_POST['statusChange'])) {
 
                     <?php
                         }
-                    }
                     ?>
                     </form>
 
+                    <td><a href="edit.php<?php echo "?taksId={$jsonDecodeContent['id']}"?>" class="btn btn-link">編集する</a></div></td>
+                    <?php
+                    }
+                     ?>
                 </tr>
             </tbody>
         </table>
