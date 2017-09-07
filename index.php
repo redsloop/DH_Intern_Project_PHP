@@ -54,7 +54,8 @@ if (isset($_POST['statusChange'])) {
             <tbody>
 
                 <?php
-                foreach ($jsonDecodeArray as $jsonDecodeContent) {
+                if (!empty($jsonDecodeArray)) {
+                    foreach ($jsonDecodeArray as $jsonDecodeContent) {
                 ?>
 
                     <tr>
@@ -86,6 +87,7 @@ if (isset($_POST['statusChange'])) {
                     <td><a href="deleteContent.php?taskId=<?php echo $jsonDecodeContent->id?>" class="btn btn-link">削除する</a></div></td>
                 <?php
                 }
+            }
                 ?>
                 </tr>
             </tbody>
