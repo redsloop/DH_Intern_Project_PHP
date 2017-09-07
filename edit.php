@@ -31,7 +31,7 @@ $jsonDecodeArray = json_decode(readInputFile($filename));
          </div>
          <div class="form-group">
              <label for="daySet">期限 or 日程</label>
-             <input type="date" class="form-control" id="daySet" placeholder="<?php echo $jsonDecodeArray[$_GET['taksId']]->day?>" name="daySet">
+             <input type="date" class="form-control" id="daySet" placeholder="<?php echo $jsonDecodeArray[$_GET['taskId']]->day?>" name="daySet">
          </div>
          <button type="submit" class="btn btn-primary btn-lg">編集</button>
      </form>

@@ -85,7 +85,7 @@ if (isset($_POST['statusChange'])) {
                     ?>
                     </form>
 
-                    <td><a href="edit.php<?php echo "?taksId={$jsonDecodeContent['id']}"?>" class="btn btn-link">編集する</a></div></td>
+                    <td><a href="edit.php<?php echo "?taskId={$jsonDecodeContent['id']}"?>" class="btn btn-link">編集する</a></div></td>
                     <?php
                     }
                      ?>
