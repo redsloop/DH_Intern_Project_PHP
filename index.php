@@ -1,7 +1,7 @@
 <?php
 require('functionAndVarForFile.php');
 
-$jsonDecodeArray = json_decode(readInputFile($filename));
+$jsonDecodeArray = json_decode(file_get_contents($filename));
 
 if (isset($_POST['statusChange'])) {
 
@@ -13,9 +13,7 @@ if (isset($_POST['statusChange'])) {
                 $jsonDecodeArray[$i]->status = '1';
             }
 
-            fileDelete($filename);
-            $jsonEncode = json_encode($jsonDecodeArray);
-            writeDateInFile($jsonEncode, $filename);
+            writeDateInFile($jsonDecodeArray, $filename);
         }
     }
 }
@@ -56,37 +54,36 @@ if (isset($_POST['statusChange'])) {
             <tbody>
 
                 <?php
-                foreach ((array)$jsonDecodeArray as $jsonDecodeObj) {
-                    $jsonDecodeContent = (array)$jsonDecodeObj;
+                foreach ($jsonDecodeArray as $jsonDecodeContent) {
                 ?>
 
                     <tr>
-                    <th scope="row"><?php echo $jsonDecodeContent['id'] + 1; ?></th>
-                    <td><?php echo $jsonDecodeContent['taskName']; ?></td>
-                    <td><?php echo $jsonDecodeContent['day']; ?></td>
+                    <th scope="row"><?php echo $jsonDecodeContent->id + 1; ?></th>
+                    <td><?php echo $jsonDecodeContent->taskName; ?></td>
+                    <td><?php echo $jsonDecodeContent->day; ?></td>
 
                     <form action="index.php" method="post">
-                        <input type="hidden" name="buttonCount" value="<?php echo $jsonDecodeContent['id']?>">
+                        <input type="hidden" name="buttonCount" value="<?php echo $jsonDecodeContent->id?>">
 
                         <?php
-                        if ($jsonDecodeContent['status'] === '1') {
+                        if ($jsonDecodeContent->status === '1') {
                         ?>
                             <input type="hidden" name="statusChange">
-                            <td><button class="btn btn-success" type="submit" name="<?php echo $jsonDecodeContent['id'] ?>">完了</button></td>
+                            <td><button class="btn btn-success" type="submit" name="<?php echo $jsonDecodeContent->id ?>">完了</button></td>
 
                         <?php
                         } else {
                         ?>
                             <input type="hidden" name="statusChange">
-                            <td><button class="btn btn-danger" type="submit" name="<?php echo $jsonDecodeContent['id'] ?>">未完了</button></td>
+                            <td><button class="btn btn-danger" type="submit" name="<?php echo $jsonDecodeContent->id?>">未完了</button></td>
 
                         <?php
                         }
                         ?>
                     </form>
 
-                    <td><a href="edit.php?taskId=<?php echo $jsonDecodeContent['id']?>" class="btn btn-link">編集する</a></div></td>
-                    <td><a href="deleteContent.php?taskId=<?php echo $jsonDecodeContent['id']?>" class="btn btn-link">削除する</a></div></td>
+                    <td><a href="edit.php?taskId=<?php echo $jsonDecodeContent->id?>" class="btn btn-link">編集する</a></div></td>
+                    <td><a href="deleteContent.php?taskId=<?php echo $jsonDecodeContent->id?>" class="btn btn-link">削除する</a></div></td>
                 <?php
                 }
                 ?>

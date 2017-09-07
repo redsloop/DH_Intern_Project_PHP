@@ -1,7 +1,23 @@
 <?php
 require('functionAndVarForFile.php');
-require('classForFile.php');
 require('redirectURL.php');
+
+if (isset($_POST['taskName']) && isset($_POST['daySet'])) {
+    $jsonDecodeArray = json_decode(file_get_contents($filename));
+
+    $jsonDecodeArray [] = [
+        "id"       => sizeof($jsonDecodeArray),
+        "taskName" => $_POST['taskName'],
+        "day"      => $_POST['daySet'],
+        "status"   => '0'
+    ];
+
+    writeDateInFile($jsonDecodeArray, $filename);
+
+    header("Location: {$url}");
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -33,27 +49,7 @@ require('redirectURL.php');
         </div>
         <button type="submit" class="btn btn-primary btn-lg">追加</button>
     </form>
-    <?php
-    if (isset($_POST['taskName']) && isset($_POST['daySet'])) {
 
-        $list = new toDoList($_POST['taskName'], $_POST['daySet']);
-
-        $jsonDecodeArray = json_decode(readInputFile($filename));
-        fileDelete($filename);
-        $jsonDecodeArray [] = [
-            "id"       => sizeof($jsonDecodeArray),
-            "taskName" => $list->getTaskName(),
-            "day"      => $list->getDaySet(),
-            "status"   => $list->getStatus()
-        ];
-        $jsonEncode = json_encode($jsonDecodeArray);
-
-        $list->writeDateInFile($jsonEncode, $filename);
-        header("Location: {$url}");
-        exit;
-    }
-
-    ?>
     <br>
     <a href="index.php" class="btn btn-info">タスクリストに戻る</a></div>
 </body>
