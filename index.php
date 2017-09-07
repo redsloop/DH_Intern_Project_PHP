@@ -55,10 +55,10 @@ if (isset($_POST['statusChange'])) {
             </thead>
             <tbody>
 
-                    <?php
-                    foreach ((array)$jsonDecodeArray as $jsonDecodeObj) {
-                        $jsonDecodeContent = (array)$jsonDecodeObj;
-                    ?>
+                <?php
+                foreach ((array)$jsonDecodeArray as $jsonDecodeObj) {
+                    $jsonDecodeContent = (array)$jsonDecodeObj;
+                ?>
 
                     <tr>
                     <th scope="row"><?php echo $jsonDecodeContent['id'] + 1; ?></th>
@@ -66,30 +66,30 @@ if (isset($_POST['statusChange'])) {
                     <td><?php echo $jsonDecodeContent['day']; ?></td>
 
                     <form action="index.php" method="post">
-                    <input type="hidden" name="buttonCount" value="<?php echo $jsonDecodeContent['id']?>">
+                        <input type="hidden" name="buttonCount" value="<?php echo $jsonDecodeContent['id']?>">
 
-                    <?php
+                        <?php
                         if ($jsonDecodeContent['status'] === '1') {
-                     ?>
-                     <input type="hidden" name="statusChange">
-                     <td><button class="btn btn-success" type="submit" name="<?php echo $jsonDecodeContent['id'] ?>">完了</button></td>
+                        ?>
+                            <input type="hidden" name="statusChange">
+                            <td><button class="btn btn-success" type="submit" name="<?php echo $jsonDecodeContent['id'] ?>">完了</button></td>
 
-                    <?php
+                        <?php
                         } else {
-                    ?>
-                    <input type="hidden" name="statusChange">
-                    <td><button class="btn btn-danger" type="submit" name="<?php echo $jsonDecodeContent['id'] ?>">未完了</button></td>
+                        ?>
+                            <input type="hidden" name="statusChange">
+                            <td><button class="btn btn-danger" type="submit" name="<?php echo $jsonDecodeContent['id'] ?>">未完了</button></td>
 
-                    <?php
+                        <?php
                         }
-                    ?>
+                        ?>
                     </form>
 
-                    <td><a href="edit.php<?php echo "?taskId={$jsonDecodeContent['id']}"?>" class="btn btn-link">編集する</a></div></td>
-                    <td><a href="deleteContent.php<?php echo "?taskId={$jsonDecodeContent['id']}"?>" class="btn btn-link">削除する</a></div></td>
-                    <?php
-                    }
-                     ?>
+                    <td><a href="edit.php?taskId=<?php echo $jsonDecodeContent['id']?>" class="btn btn-link">編集する</a></div></td>
+                    <td><a href="deleteContent.php?taskId=<?php echo $jsonDecodeContent['id']?>" class="btn btn-link">削除する</a></div></td>
+                <?php
+                }
+                ?>
                 </tr>
             </tbody>
         </table>
