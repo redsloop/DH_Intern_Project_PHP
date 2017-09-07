@@ -9,7 +9,7 @@ if (isset($_POST['statusChange'])) {
         if (isset($_POST[$i])) {
             if ($jsonDecodeArray[$i]->status === '1'){
                 $jsonDecodeArray[$i]->status = '0';
-            } elseif ($jsonDecodeArray[$i]->status == '0') {
+            } elseif ($jsonDecodeArray[$i]->status === '0') {
                 $jsonDecodeArray[$i]->status = '1';
             }
 
