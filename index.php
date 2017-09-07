@@ -13,7 +13,7 @@ if (isset($_POST['statusChange'])) {
                 $jsonDecodeArray[$i]->status = '1';
             }
 
-            writeDateInFile($jsonDecodeArray, $filename);
+            file_put_contents($filename, json_encode($jsonDecodeArray).PHP_EOL);
         }
     }
 }

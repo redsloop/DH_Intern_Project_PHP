@@ -26,7 +26,7 @@ if (isset($_POST['taskName']) && isset($_POST['daySet'])) {
         }
     }
 
-    writeDateInFile($jsonEditArray, $filename);
+    file_put_contents($filename, json_encode($jsonEditArray).PHP_EOL);
     header("Location: {$url}");
     exit;
 }
