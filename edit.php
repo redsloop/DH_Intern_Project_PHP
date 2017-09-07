@@ -43,7 +43,7 @@ $jsonDecodeArray = json_decode(readInputFile($filename));
             $jsonEditArray = array();
             foreach ($jsonDecodeArray as $jsonDecodeObj) {
                 $jsonDecodeContent = (array)$jsonDecodeObj;
-                if($jsonDecodeContent['id'] == $_GET['taskId'] - 1) {
+                if($jsonDecodeContent['id'] == $_GET['taskId']) {
                     $jsonEditArray [] =[
                         "id"       => $jsonDecodeContent['id'],
                         "taskName" => $_POST['taskName'],
