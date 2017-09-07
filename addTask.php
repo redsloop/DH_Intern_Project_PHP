@@ -1,6 +1,5 @@
 <?php
-require('functionAndVarForFile.php');
-require('redirectURL.php');
+require('globalVar.php');
 
 if (isset($_POST['taskName']) && isset($_POST['daySet'])) {
     $jsonDecodeArray = json_decode(file_get_contents($filename));

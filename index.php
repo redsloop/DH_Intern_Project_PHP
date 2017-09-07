@@ -1,5 +1,5 @@
 <?php
-require('functionAndVarForFile.php');
+require('globalVar.php');
 
 $jsonDecodeArray = json_decode(file_get_contents($filename));
 
